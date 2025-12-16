@@ -3,7 +3,7 @@
 export type SeverityLevel = 'Critical' | 'Severe' | 'High' | 'Medium' | 'Low';
 
 // 2. 定義警報狀態
-export type AlertStatus = 'New' | 'Investigating' | 'Resolved';
+export type AlertStatus = 'New' | 'Investigating' | 'Resolved' | 'Blocked' | 'Quarantined' | 'Closed';
 
 // 3. 定義核心警報物件介面 (Security Alert Interface)
 export interface SecurityAlert {

@@ -1,5 +1,7 @@
-// src/Dashboard.tsx
-import React from 'react';
+
+import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { type RootState } from '../store/store';
 import { Box, Paper, Typography, Container, Chip } from '@mui/material';
 
 import Grid from '@mui/material/Grid';
@@ -7,6 +9,20 @@ import SecurityIcon from '@mui/icons-material/Security';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
 export const Dashboard: React.FC = () => {
+  // 從 Redux 取得所有警報資料
+  const alerts = useSelector((state: RootState) => state.dashboard.alerts);
+
+  // 計算各類數據 (使用 useMemo 優化效能)
+  const criticalCount = useMemo(() => 
+    alerts.filter(a => a.severity === 'Critical').length, 
+  [alerts]);
+
+  const severeCount = useMemo(() => 
+    alerts.filter(a => a.severity === 'Severe').length, 
+  [alerts]);
+
+  const totalEvents = alerts.length;
+
   return (
     <Box sx={{ flexGrow: 1, minHeight: '100vh', backgroundColor: '#f4f6f8', py: 4 }}>
       <Container maxWidth="xl">
@@ -20,17 +36,15 @@ export const Dashboard: React.FC = () => {
         </Box>
 
         {/* 2. 核心佈局 Grid Container */}
-        {/* MUI v6: Grid 本身就是 container，spacing 用法不變 */}
         <Grid container spacing={3}>
           
           {/* --- A. 頂部數據總覽卡片 --- */}
-          {/* MUI v6 修正: 移除 item，並將 xs, sm, md 改為 size={{ ... }} */}
           
           {/* 卡片 1: Critical Threats */}
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <Paper elevation={2} sx={{ p: 3, display: 'flex', flexDirection: 'column', height: 140, borderLeft: '6px solid #d32f2f' }}>
               <Typography color="textSecondary" variant="subtitle1">Critical Threats</Typography>
-              <Typography variant="h3" color="#d32f2f" fontWeight="bold">5</Typography>
+              <Typography variant="h3" color="#d32f2f" fontWeight="bold">{criticalCount}</Typography>
               <Chip label="+2 from last hour" color="error" size="small" sx={{ mt: 'auto', alignSelf: 'flex-start' }} />
             </Paper>
           </Grid>
@@ -39,7 +53,7 @@ export const Dashboard: React.FC = () => {
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <Paper elevation={2} sx={{ p: 3, display: 'flex', flexDirection: 'column', height: 140, borderLeft: '6px solid #f57c00' }}>
               <Typography color="textSecondary" variant="subtitle1">Severe Alerts</Typography>
-              <Typography variant="h3" color="#f57c00" fontWeight="bold">12</Typography>
+              <Typography variant="h3" color="#f57c00" fontWeight="bold">{severeCount}</Typography>
             </Paper>
           </Grid>
 
@@ -47,7 +61,7 @@ export const Dashboard: React.FC = () => {
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <Paper elevation={2} sx={{ p: 3, display: 'flex', flexDirection: 'column', height: 140, borderLeft: '6px solid #1976d2' }}>
               <Typography color="textSecondary" variant="subtitle1">Total Events</Typography>
-              <Typography variant="h3" color="#1976d2" fontWeight="bold">1,024</Typography>
+              <Typography variant="h3" color="#1976d2" fontWeight="bold">{totalEvents}</Typography>
             </Paper>
           </Grid>
 
