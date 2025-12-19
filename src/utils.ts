@@ -7,6 +7,7 @@ const getRandom = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)
 export const generateRandomAlert = (): SecurityAlert => {
   const severities: SeverityLevel[] = ['Critical', 'Severe', 'High', 'Medium', 'Low'];
   const rules = ['SQL Injection', 'DDoS Attack', 'Brute Force', 'Malware Detected', 'Port Scan'];
+  const edgeGroups = ['Cathay Bank HQ', 'Taipei 101', 'Taimall', 'Carrefour', 'Arcade']; // [新增] 地點
   const statuses: AlertStatus[] = ['New', 'Investigating'];
 
   return {
@@ -17,6 +18,7 @@ export const generateRandomAlert = (): SecurityAlert => {
     destinationIp: '10.0.0.5',
     severity: getRandom(severities),
     status: getRandom(statuses),
-    description: 'Automatic anomaly detection triggered.'
+    description: 'Automatic anomaly detection triggered.',
+    edgeGroup: getRandom(edgeGroups),
   };
 };

@@ -12,7 +12,8 @@ export const MOCK_ALERTS: SecurityAlert[] = [
     destinationIp: '10.0.0.1',
     severity: 'Critical',
     status: 'New',
-    description: 'Multiple failed login attempts detected from single IP.'
+    description: 'Multiple failed login attempts detected from single IP.',
+    edgeGroup: 'Cathay Bank HQ'
   },
   {
     id: 'evt-002',
@@ -21,7 +22,8 @@ export const MOCK_ALERTS: SecurityAlert[] = [
     sourceIp: '45.33.22.11',
     destinationIp: '10.0.0.2',
     severity: 'Severe',
-    status: 'Investigating'
+    status: 'Investigating',
+    edgeGroup: 'Cathay Bank HQ'
   },
   {
     id: 'evt-003',
@@ -31,7 +33,8 @@ export const MOCK_ALERTS: SecurityAlert[] = [
     destinationIp: '10.0.0.5',
     severity: 'High',
     status: 'Blocked',
-    description: 'Malicious SQL payload detected in URL parameters targeting web server.'
+    description: 'Malicious SQL payload detected in URL parameters targeting web server.',
+    edgeGroup: 'Cathay Bank HQ'
   },
   {
     id: 'evt-004',
@@ -41,7 +44,8 @@ export const MOCK_ALERTS: SecurityAlert[] = [
     destinationIp: '10.0.0.1',
     severity: 'Critical',
     status: 'Quarantined',
-    description: 'Endpoint antivirus detected "Trojan.Win32.Emotet" in email attachment.'
+    description: 'Endpoint antivirus detected "Trojan.Win32.Emotet" in email attachment.',
+    edgeGroup: 'Cathay Bank HQ'
   },
   {
     id: 'evt-005',
@@ -51,7 +55,8 @@ export const MOCK_ALERTS: SecurityAlert[] = [
     destinationIp: '142.250.1.1',
     severity: 'Critical',
     status: 'New',
-    description: 'Unusually large outbound data transfer (>5GB) to unknown cloud storage.'
+    description: 'Unusually large outbound data transfer (>5GB) to unknown cloud storage.',
+    edgeGroup: 'Cathay Bank HQ'
   },
   {
     id: 'evt-006',
@@ -61,7 +66,8 @@ export const MOCK_ALERTS: SecurityAlert[] = [
     destinationIp: '10.0.0.3',
     severity: 'Medium',
     status: 'Investigating',
-    description: 'User login detected from London immediately after login from Taipei.'
+    description: 'User login detected from London immediately after login from Taipei.',
+    edgeGroup: 'Cathay Bank HQ'
   },
   {
     id: 'evt-007',
@@ -71,7 +77,8 @@ export const MOCK_ALERTS: SecurityAlert[] = [
     destinationIp: '10.0.0.2',
     severity: 'Severe',
     status: 'New',
-    description: 'Standard user account attempted to modify system registry keys.'
+    description: 'Standard user account attempted to modify system registry keys.',
+    edgeGroup: 'Cathay Bank HQ'
   },
   {
     id: 'evt-008',
@@ -81,7 +88,8 @@ export const MOCK_ALERTS: SecurityAlert[] = [
     destinationIp: 'N/A',
     severity: 'Low',
     status: 'Closed',
-    description: 'Blocked USB mass storage device connection on restricted workstation.'
+    description: 'Blocked USB mass storage device connection on restricted workstation.',
+    edgeGroup: 'Cathay Bank HQ'
   },
   {
     id: 'evt-009',
@@ -91,7 +99,8 @@ export const MOCK_ALERTS: SecurityAlert[] = [
     destinationIp: '104.21.55.2',
     severity: 'High',
     status: 'Resolved',
-    description: 'Internal host attempted to contact known malicious C2 domain.'
+    description: 'Internal host attempted to contact known malicious C2 domain.',
+    edgeGroup: 'Cathay Bank HQ'
   },
   {
     id: 'evt-010',
@@ -101,6 +110,7 @@ export const MOCK_ALERTS: SecurityAlert[] = [
     destinationIp: '10.0.0.8',
     severity: 'Severe',
     status: 'Investigating',
-    description: 'High volume of failed SSH login attempts on port 22.'
+    description: 'High volume of failed SSH login attempts on port 22.',
+    edgeGroup: 'Cathay Bank HQ'
   }
 ];

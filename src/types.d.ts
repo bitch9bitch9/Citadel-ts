@@ -15,4 +15,5 @@ export interface SecurityAlert {
   severity: SeverityLevel; // 引用上面定義的風險等級
   status: AlertStatus;    // 處理狀態 (讓您可以做篩選功能)
   description?: string;   // 可選欄位 (?)，警報的詳細描述
+  edgeGroup: string;
 }

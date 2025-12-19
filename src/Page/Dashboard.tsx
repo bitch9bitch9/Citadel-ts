@@ -12,7 +12,8 @@ import { addAlert } from '../store/dashboardSlice';
 
 // 引入元件與工具
 import { AlertTrendChart } from '../components/AlertTrendChart';
-import { generateRandomAlert } from '../utils'; // 剛剛寫好的產生器
+import { LiveAlertTable } from '../components/LiveAlertTable';
+import { generateRandomAlert } from '../utils'; // 產生器
 
 export const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
@@ -38,14 +39,14 @@ export const Dashboard: React.FC = () => {
   }, [dispatch]);
 
   // 輔助函數：根據風險等級回傳對應顏色
-  const getSeverityColor = (severity: string) => {
-    switch (severity) {
-      case 'Critical': return 'error';
-      case 'Severe': return 'warning';
-      case 'High': return 'warning';
-      default: return 'info';
-    }
-  };
+  // const getSeverityColor = (severity: string) => {
+  //   switch (severity) {
+  //     case 'Critical': return 'error';
+  //     case 'Severe': return 'warning';
+  //     case 'High': return 'warning';
+  //     default: return 'info';
+  //   }
+  // };
 
   return (
     <Box sx={{ flexGrow: 1, minHeight: '100vh', backgroundColor: '#f4f6f8', py: 4 }}>
@@ -96,46 +97,26 @@ export const Dashboard: React.FC = () => {
           </Grid>
 
           {/* B. 圖表區 */}
-          <Grid size={{ xs: 12, md: 8 }}>
+          <Grid size={{ xs: 12 }}>
             <Paper elevation={3} sx={{ p: 3, height: 400 }}>
               <Typography variant="h6" gutterBottom>警報趨勢圖 (Alert Trends)</Typography>
               <Box sx={{ width: '100%', height: '90%' }}>
-                <AlertTrendChart />
+                <AlertTrendChart/>
               </Box>
             </Paper>
           </Grid>
 
           {/* C. 最新警報列表 (Live Feed) */}
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Paper elevation={3} sx={{ p: 3, height: 400, overflow: 'auto' }}>
+          <Grid size={{ xs: 12 }}> 
+            <Paper elevation={3} sx={{ p: 2, backgroundColor: '#1e1e1e', color: '#fff' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-                <Typography variant="h6">最新警報 (Live Feed)</Typography>
-                <WarningAmberIcon color="warning" className="blink" /> {/* 這裡可以用 CSS 讓它閃爍 */}
+                <Typography variant="h6" fontWeight="bold">Live Alert Feed</Typography>
+                <WarningAmberIcon sx={{ color: '#f57c00' }} />
               </Box>
               
-              {/* 【核心修改】連接 Redux 資料 */}
-              {/* 只顯示最新的 10 筆 */}
-              {alerts.slice(0, 10).map((alert) => (
-                <Box key={alert.id} sx={{ mb: 2, p: 1, borderBottom: '1px solid #eee', animation: 'fadeIn 0.5s' }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Typography variant="body2" fontWeight="bold">{alert.ruleName}</Typography>
-                    {/* 簡單格式化時間 */}
-                    <Typography variant="caption" color="textSecondary">
-                      {new Date(alert.timestamp).toLocaleTimeString()}
-                    </Typography>
-                  </Box>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
-                    <Typography variant="caption" color="textSecondary">{alert.sourceIp}</Typography>
-                    <Chip 
-                      label={alert.severity} 
-                      size="small" 
-                      color={getSeverityColor(alert.severity)} 
-                      variant="outlined" 
-                      sx={{ height: 20, fontSize: '0.7rem' }} 
-                    />
-                  </Box>
-                </Box>
-              ))}
+              {/* 放入我們剛寫好的 Table 元件，並傳入 alerts 資料 */}
+              <LiveAlertTable alerts={alerts} />
+              
             </Paper>
           </Grid>
 
