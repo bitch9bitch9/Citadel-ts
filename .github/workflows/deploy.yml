@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main] # 當 main 分支有更新時觸發
+    branches: [master] # 當 master 分支有更新時觸發
 
 permissions:
   contents: read
