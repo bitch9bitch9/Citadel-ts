@@ -14,7 +14,7 @@ export const LiveAlertTable: React.FC<Props> = ({ alerts }) => {
   const [filter, setFilter] = useState('All');
 
   // 處理 Tab 切換
-  const handleFilterChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleFilterChange = (_e: React.SyntheticEvent, newValue: string) => {
     setFilter(newValue);
   };
 
