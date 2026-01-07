@@ -1,5 +1,5 @@
-// src/Dashboard.tsx
 import React, { useEffect, useMemo } from 'react';
+import './Dashboard.scss';
 import { Box, Paper, Typography, Container, Chip } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import SecurityIcon from '@mui/icons-material/Security';
@@ -7,13 +7,13 @@ import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
 // Redux 相關引入
 import { useSelector, useDispatch } from 'react-redux';
-import { type RootState } from '../store/store';
-import { addAlert } from '../store/dashboardSlice';
+import { type RootState } from '../../store/store';
+import { addAlert } from '../../store/dashboardSlice';
 
 // 引入元件與工具
-import { AlertTrendChart } from '../components/AlertTrendChart';
-import { LiveAlertTable } from '../components/LiveAlertTable';
-import { generateRandomAlert } from '../utils'; // 產生器
+import { AlertTrendChart } from '../../components/AlertTrendChart';
+import { LiveAlertTable } from '../../components/LiveAlertTable';
+import { generateRandomAlert } from '../../utils'; // 產生器
 
 export const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ export const Dashboard: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <Box sx={{ flexGrow: 1, minHeight: '100vh', backgroundColor: '#f4f6f8', py: 4 }}>
+    <Box sx={{ flexGrow: 1, minHeight: '100vh', backgroundColor: '#000', py: 4 }}>
       <Container maxWidth="xl">
         
         {/* 標題區 */}
@@ -55,7 +55,7 @@ export const Dashboard: React.FC = () => {
           {/* A. 數據卡片區 (會自動跳動！) */}
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <Paper elevation={2} sx={{ p: 3, display: 'flex', flexDirection: 'column', height: 140, borderLeft: '6px solid #d32f2f' }}>
-              <Typography color="textSecondary" variant="subtitle1">Critical Threats</Typography>
+              <Typography variant="subtitle1">Critical Threats</Typography>
               <Typography variant="h3" color="#d32f2f" fontWeight="bold">
                 {criticalCount} {/* 自動更新 */}
               </Typography>
@@ -65,21 +65,21 @@ export const Dashboard: React.FC = () => {
 
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <Paper elevation={2} sx={{ p: 3, display: 'flex', flexDirection: 'column', height: 140, borderLeft: '6px solid #f57c00' }}>
-              <Typography color="textSecondary" variant="subtitle1">Severe Alerts</Typography>
+              <Typography variant="subtitle1">Severe Alerts</Typography>
               <Typography variant="h3" color="#f57c00" fontWeight="bold">{severeCount}</Typography>
             </Paper>
           </Grid>
 
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <Paper elevation={2} sx={{ p: 3, display: 'flex', flexDirection: 'column', height: 140, borderLeft: '6px solid #1976d2' }}>
-              <Typography color="textSecondary" variant="subtitle1">Total Events</Typography>
+              <Typography variant="subtitle1">Total Events</Typography>
               <Typography variant="h3" color="#1976d2" fontWeight="bold">{totalEvents}</Typography>
             </Paper>
           </Grid>
 
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <Paper elevation={2} sx={{ p: 3, display: 'flex', flexDirection: 'column', height: 140, borderLeft: '6px solid #2e7d32' }}>
-              <Typography color="textSecondary" variant="subtitle1">System Status</Typography>
+              <Typography variant="subtitle1">System Status</Typography>
               <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
                 <Typography variant="h5" color="#2e7d32" fontWeight="bold">Active Monitoring</Typography>
               </Box>
@@ -88,9 +88,9 @@ export const Dashboard: React.FC = () => {
 
           {/* B. 圖表區 */}
           <Grid size={{ xs: 12 }}>
-            <Paper elevation={3} sx={{ p: 3,backgroundColor: '#1e1e1e', color: '#fff', height: 400 }}>
+            <Paper elevation={3} sx={{ p: 3, color: '#fff', height: 400 }}>
               <Typography variant="h6" gutterBottom>警報趨勢圖 (Alert Trends)</Typography>
-              <Box sx={{ width: '100%', height: '90%' }}>
+              <Box sx={{ width: '100%', height: '100%' }}>
                 <AlertTrendChart/>
               </Box>
             </Paper>
