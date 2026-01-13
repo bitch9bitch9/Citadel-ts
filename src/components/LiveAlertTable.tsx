@@ -1,4 +1,3 @@
-// src/components/LiveAlertTable.tsx
 import React, { useState } from 'react';
 import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
@@ -26,10 +25,10 @@ export const LiveAlertTable: React.FC<Props> = ({ alerts }) => {
   // 定義風險等級的顏色 (配合截圖的橘/紅色系)
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case 'Critical': return '#d32f2f'; // 紅
-      case 'Severe': return '#f57c00';   // 橘
-      case 'High': return '#ff9800';     // 淺橘
-      default: return '#aaa';            // 灰
+      case 'Critical': return '#d32f2f';
+      case 'Severe': return '#f57c00';
+      case 'High': return '#ff9800';
+      default: return '#aaa';
     }
   };
 

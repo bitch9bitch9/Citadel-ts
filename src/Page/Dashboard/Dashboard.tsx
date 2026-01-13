@@ -14,10 +14,14 @@ import { addAlert } from '../../store/dashboardSlice';
 import { AlertTrendChart } from '../../components/AlertTrendChart';
 import { LiveAlertTable } from '../../components/LiveAlertTable';
 import { generateRandomAlert } from '../../utils'; // 產生器
+import type { SecurityAlert } from '../../types';
 
 export const Dashboard: React.FC = () => {
+
+  const [alertStatData, setAlertStatData] = React.useState<SecurityAlert>(); // 用於傳遞每3秒生成數據
+
   const dispatch = useDispatch();
-  
+
   // 1. 從 Redux 取得資料
   const alerts = useSelector((state: RootState) => state.dashboard.alerts);
 
@@ -32,6 +36,7 @@ export const Dashboard: React.FC = () => {
     const timer = setInterval(() => {
       const newAlert = generateRandomAlert(); // 產生新警報
       dispatch(addAlert(newAlert));           // 派送給 Redux
+      setAlertStatData(newAlert);
     }, 3000);
 
     // 清除函數：當使用者離開頁面時，記得停止定時器，避免記憶體洩漏
@@ -41,7 +46,7 @@ export const Dashboard: React.FC = () => {
   return (
     <Box sx={{ flexGrow: 1, minHeight: '100vh', backgroundColor: '#000', py: 4 }}>
       <Container maxWidth="xl">
-        
+
         {/* 標題區 */}
         <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
           <SecurityIcon sx={{ fontSize: 40, color: '#1976d2', mr: 2 }} />
@@ -51,7 +56,7 @@ export const Dashboard: React.FC = () => {
         </Box>
 
         <Grid container spacing={3}>
-          
+
           {/* A. 數據卡片區 (會自動跳動！) */}
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <Paper elevation={2} sx={{ p: 3, display: 'flex', flexDirection: 'column', height: 140, borderLeft: '6px solid #d32f2f' }}>
@@ -91,22 +96,22 @@ export const Dashboard: React.FC = () => {
             <Paper elevation={3} sx={{ p: 3, color: '#fff', height: 400 }}>
               <Typography variant="h6" gutterBottom>警報趨勢圖 (Alert Trends)</Typography>
               <Box sx={{ width: '100%', height: '100%' }}>
-                <AlertTrendChart/>
+                <AlertTrendChart data={alertStatData} />
               </Box>
             </Paper>
           </Grid>
 
           {/* C. 最新警報列表 (Live Feed) */}
-          <Grid size={{ xs: 12 }}> 
+          <Grid size={{ xs: 12 }}>
             <Paper elevation={3} sx={{ p: 2, backgroundColor: '#1e1e1e', color: '#fff' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
                 <Typography variant="h6" fontWeight="bold">Live Alert Feed</Typography>
                 <WarningAmberIcon sx={{ color: '#f57c00' }} />
               </Box>
-              
+
               {/* 放入我們剛寫好的 Table 元件，並傳入 alerts 資料 */}
               <LiveAlertTable alerts={alerts} />
-              
+
             </Paper>
           </Grid>
 
